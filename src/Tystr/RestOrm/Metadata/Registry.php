@@ -2,9 +2,6 @@
 
 namespace Tystr\RestOrm\Metadata;
 
-use Tystr\RestOrm\Metadata\Factory;
-use Tystr\RestOrm\Metadata\Metadata;
-
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
