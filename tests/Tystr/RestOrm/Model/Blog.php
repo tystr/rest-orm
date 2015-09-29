@@ -15,4 +15,5 @@ class Blog
      */
     public $id;
 
+    public $body;
 }
