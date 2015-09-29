@@ -1,0 +1,24 @@
+{
+    "name": "tystr/rest-orm",
+    "description": "A simple ORM-like library handling object persistence with a RESTful API.",
+    "require": {
+        "guzzlehttp/guzzle": "^6.1",
+        "jms/serializer": "^1.0",
+        "jms/metadata": "^1.5",
+        "doctrine/annotations": "^1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tyler Stroud",
+            "email": "tyler@tylerstroud.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    }
+}
