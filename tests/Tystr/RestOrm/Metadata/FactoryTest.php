@@ -19,5 +19,24 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('Tystr\RestOrm\Model\Blog', $metadata->getClass());
         $this->assertEquals('blogs', $metadata->getResource());
+        $this->assertEquals('id', $metadata->getIdentifier());
+    }
+
+    /**
+     * @expectedException Tystr\RestOrm\Exception\MissingIdentifierMappingException
+     */
+    public function testCreateThrowsExceptionWhenIdentifierMappingIsMissing()
+    {
+        $factory = new Factory();
+        $factory->create('stdClass');
+    }
+
+    /**
+     * @expectedException Tystr\RestOrm\Exception\InvalidIdentifierMappingException
+     */
+    public function testCreateThrowsExceptionWhenMultiplePropertiesHaveAnIdentifierMapping()
+    {
+        $factory = new Factory();
+        $factory->create('Tystr\RestOrm\Model\BlogInvalidIdentifierMapping');
     }
 }

@@ -21,7 +21,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetMetadataForClass()
     {
-        $expected = new Metadata($this->class);
+        $expected = new Metadata(new \ReflectionClass($this->class));
         $this->factory->expects($this->once())
             ->method('create')
             ->with($this->class)
@@ -34,7 +34,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetMetadataForClassWithSubsequentCalls()
     {
-        $expected = new Metadata($this->class);
+        $expected = new Metadata(new \ReflectionClass($this->class));
         $this->factory->expects($this->once())
             ->method('create')
             ->with($this->class)
@@ -50,7 +50,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->factory->expects($this->never())
             ->method('create');
 
-        $expected = new Metadata($this->class);
+        $expected = new Metadata(new \ReflectionClass($this->class));
         $this->registry->addMetadata($expected);
         $metadata = $this->registry->getMetadataForClass($this->class);
         $this->assertSame($expected, $metadata);

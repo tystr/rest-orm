@@ -2,15 +2,18 @@
 
 namespace Tystr\RestOrm\Metadata;
 
+use Tystr\RestOrm\Exception\InvalidArgumentException;
+use ReflectionClass;
+
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
 class Metadata
 {
     /**
-     * @var string
+     * @var ReflectionClass
      */
-    private $class;
+    private $reflClass;
 
     /**
      * @var string
@@ -18,11 +21,16 @@ class Metadata
     private $resource;
 
     /**
-     * @param string $class
+     * @var string
      */
-    public function __construct($class)
+    private $identifier;
+
+    /**
+     * @param ReflectionClass $reflClass
+     */
+    public function __construct(ReflectionClass $reflClass)
     {
-        $this->class = $class;
+        $this->reflClass = $reflClass;
     }
 
     /**
@@ -30,7 +38,7 @@ class Metadata
      */
     public function getClass()
     {
-        return $this->class;
+        return $this->reflClass->getName();
     }
 
     /**
@@ -49,4 +57,33 @@ class Metadata
         $this->resource = $resource;
     }
 
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @param string $identifier
+     */
+    public function setIdentifier($identifier)
+    {
+        $this->identifier = $identifier;
+    }
+
+    /**
+     * @param object $object
+     *
+     * @return string|int
+     */
+    public function getIdentifierValue($object)
+    {
+        if (get_class($object) !== $this->getClass()) {
+            throw new InvalidArgumentException(sprintf('$object must be an instance of "%s".', $this->getClass()));
+        }
+
+        return $this->reflClass->getProperty($this->getIdentifier())->getValue($object);
+    }
 }
