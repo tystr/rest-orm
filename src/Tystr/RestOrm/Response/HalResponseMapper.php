@@ -69,7 +69,12 @@ class HalResponseMapper implements ResponseMapperInterface
                     $data[] = $hal->getData();
                 }
             }
-            $class = sprintf('array<%s>', $class);
+            // @todo Fix this hack makes sure we only wrap in array<> if the Manager hasn't already. This is because
+            // The StandardResponseMapper is not aware if the request is for a collection or not, so the manager handles
+            // wrapping the type in array<>
+            if (substr($class, 0, 6) !== 'array<') {
+                $class = sprintf('array<%s>', $class);
+            }
         } else {
             $data = $hal->getData();
         }
