@@ -28,7 +28,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testCreateThrowsExceptionWhenIdentifierMappingIsMissing()
     {
         $factory = new Factory();
-        $factory->create('stdClass');
+        $factory->create('Tystr\RestOrm\Model\BlogMissingIdentifier');
     }
 
     /**
