@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8543c14ee5e6242059e5b0e9aa67e4b3",
-    "content-hash": "e710f785de3be124bc53f5c8b62ce059",
+    "hash": "c026836e95a17cfb424fd9c5b8d0ae3a",
+    "content-hash": "351ab5d31b0ff674cb1d59c684cd1770",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -510,6 +510,54 @@
                 "xml"
             ],
             "time": "2015-06-16 11:50:24"
+        },
+        {
+            "name": "nocarrier/hal",
+            "version": "0.9.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/blongden/hal.git",
+                "reference": "f9fc0acaae3a6247bc465e92a24f9c9fc8207cd0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/blongden/hal/zipball/f9fc0acaae3a6247bc465e92a24f9c9fc8207cd0",
+                "reference": "f9fc0acaae3a6247bc465e92a24f9c9fc8207cd0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Nocarrier": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Longden",
+                    "email": "ben@nocarrier.co.uk",
+                    "homepage": "http://nocarrier.co.uk"
+                }
+            ],
+            "description": "application/hal builder / formatter for PHP 5.3+",
+            "homepage": "https://github.com/blongden/hal",
+            "keywords": [
+                "hal",
+                "hypermedia",
+                "json",
+                "rest",
+                "xml"
+            ],
+            "time": "2015-07-01 09:57:11"
         },
         {
             "name": "phpcollection/phpcollection",
