@@ -58,41 +58,81 @@ class Factory
     }
 
     /**
-     * @param string $method
+     * Returns a POST request if the object's identifier is null; a PUT request is returned otherwise
+     *
      * @param object $object
      *
      * @return Request
      */
-    public function createRequest($method, $object)
+    public function createSaveRequest($object)
     {
-        if (!is_object($object)) {
-            throw new InvalidArgumentException();
+        $metadata = $this->metadataRegistry->getMetadataForClass(get_class($object));
+        if (null === $id = $metadata->getIdentifierValue($object)) {
+            // Identifier is null so this is a new entity
+            return new Request(
+                'POST',
+                $this->urlGenerator->getCreateUrl($metadata->getResource()),
+                ['Content-Type' => $this->getContentTypeHeader()],
+                $this->serializer->serialize($object, $this->format)
+            );
         }
 
+        // Identifier is set so we are modifying an exiting entity
+        return new Request(
+            'PUT',
+            $this->urlGenerator->getModifyUrl($metadata->getResource(), $id),
+            ['Content-Type' => $this->getContentTypeHeader()],
+            $this->serializer->serialize($object, $this->format)
+        );
+    }
+
+    /**
+     * @param string $class
+     * @param string $id
+     *
+     * @return Request
+     */
+    public function createFindOneRequest($class, $id)
+    {
+        $metadata = $this->metadataRegistry->getMetadataForClass($class);
+
+        return new Request(
+            'GET',
+            $this->urlGenerator->getFindOneUrl($metadata->getResource(), $id),
+            ['Content-Type' => $this->getContentTypeHeader()]
+        );
+    }
+
+    /**
+     * @param string $class
+     *
+     * @return Request
+     */
+    public function createFindAllRequest($class)
+    {
+        $metadata = $this->metadataRegistry->getMetadataForClass($class);
+
+        return new Request(
+            'GET',
+            $this->urlGenerator->getFindAllUrl($metadata->getResource()),
+            ['Content-Type' => $this->getContentTypeHeader()]
+        );
+    }
+
+    /**
+     * @param object $object
+     *
+     * @return Request
+     */
+    public function createDeleteRequest($object)
+    {
         $metadata = $this->metadataRegistry->getMetadataForClass(get_class($object));
 
-        switch ($method) {
-            case 'POST':
-                $uri = $this->urlGenerator->getCreateUrl($metadata->getResource());
-                $body = $this->serializer->serialize($object, $this->format);
-                break;
-            case 'PUT':
-                $uri = $this->urlGenerator->getModifyUrl($metadata->getResource(), $metadata->getIdentifierValue($object));
-                $body = $this->serializer->serialize($object, $this->format);
-                break;
-            case 'GET':
-                $uri = $this->urlGenerator->getModifyUrl($metadata->getResource(), $metadata->getIdentifierValue($object));
-                $body = null;
-                break;
-            case 'PATCH':
-                throw new \RuntimeException('PATCH not yet implemented.');
-            default:
-                throw new InvalidArgumentException(sprintf('Unsupported HTTP method "%s".', $method));
-        }
-
-        $headers = ['Content-Type' => $this->getContentTypeHeader()];
-
-        return new Request($method, $uri, $headers, $body);
+        return new Request(
+            'DELETE',
+            $this->urlGenerator->getRemoveUrl($metadata->getResource(), $metadata->getIdentifierValue($object)),
+            ['Content-Type' => $this->getContentTypeHeader()]
+        );
     }
 
     /**
