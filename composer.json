@@ -9,7 +9,8 @@
         "nocarrier/hal": "^0.9.11"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^4.8",
+        "fabpot/php-cs-fixer": "^1.10"
     },
     "license": "MIT",
     "authors": [
