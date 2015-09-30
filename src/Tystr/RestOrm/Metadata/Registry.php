@@ -15,9 +15,9 @@ class Registry
     /**
      * @param Factory $factory
      */
-    public function __construct(Factory $factory)
+    public function __construct(Factory $factory = null)
     {
-        $this->factory = $factory;
+        $this->factory = $factory ?: new Factory();
     }
 
     /**
