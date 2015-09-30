@@ -2,6 +2,7 @@
     "name": "tystr/rest-orm",
     "description": "A simple ORM-like library handling object persistence with a RESTful API.",
     "require": {
+        "php": ">=5.5",
         "guzzlehttp/guzzle": "^6.1",
         "jms/serializer": "^1.0",
         "jms/metadata": "^1.5",
