@@ -13,7 +13,7 @@ class HalResponseMapperTest extends \PHPUnit_Framework_TestCase
     public function testMapWithHalCollection()
     {
         $headers = [
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
         ];
         $response = new Response(200, $headers, $hal = $this->getHalCollection());
 
@@ -29,7 +29,7 @@ class HalResponseMapperTest extends \PHPUnit_Framework_TestCase
     public function testMap()
     {
         $headers = [
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
         ];
         $response = new Response(200, $headers, $hal = $this->getHalResource());
         $mapper = new HalResponseMapper(SerializerBuilder::create()->build());

@@ -38,7 +38,7 @@ class Factory
     }
 
     /**
-     * @param ReflectionClass $reflClass
+     * @param ReflectionClass  $reflClass
      * @param AnnotationReader $reader
      *
      * @return string
@@ -49,7 +49,7 @@ class Factory
         $count = 0;
         foreach ($reflClass->getProperties() as $reflProperty) {
             if (null !== $reader->getPropertyAnnotation($reflProperty, Id::class)) {
-                $count++;
+                ++$count;
                 $identifier = $reflProperty->getName();
             }
         }

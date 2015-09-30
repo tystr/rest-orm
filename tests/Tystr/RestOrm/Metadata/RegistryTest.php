@@ -16,7 +16,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->class = 'Tystr\RestOrm\Model\Blog';
         $this->factory = $this->getMockBuilder('Tystr\RestOrm\Metadata\Factory')->getMock();
         $this->registry = new Registry($this->factory);
-
     }
 
     public function testGetMetadataForClass()

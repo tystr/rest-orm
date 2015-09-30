@@ -34,8 +34,7 @@ class Factory
      * @param Registry              $metadataRegistry
      * @param SerializerInterface   $serializer
      * @param UrlGeneratorInterface $urlGenerator
-     *
-     * @param string   $format
+     * @param string                $format
      */
     public function __construct(
         Registry $metadataRegistry,
@@ -58,7 +57,7 @@ class Factory
     }
 
     /**
-     * Returns a POST request if the object's identifier is null; a PUT request is returned otherwise
+     * Returns a POST request if the object's identifier is null; a PUT request is returned otherwise.
      *
      * @param object $object
      *

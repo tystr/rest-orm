@@ -25,7 +25,7 @@ class StandardResponseMapper implements ResponseMapperInterface
     }
 
     /**
-     * Maps a response body to an object
+     * Maps a response body to an object.
      *
      * @param ResponseInterface $response
      * @param string            $class

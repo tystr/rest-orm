@@ -2,7 +2,6 @@
 
 namespace Tystr\RestOrm\Request;
 
-use DoctrineTest\InstantiatorTestAsset\XMLReaderAsset;
 use JMS\Serializer\SerializerBuilder;
 use Tystr\RestOrm\Model\Blog;
 use Tystr\RestOrm\Request\Factory as RequestFactory;

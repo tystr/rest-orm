@@ -36,7 +36,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $this->stack->push($this->history);
         $clientHeaders = [
             'Authorization' => 'Token abcdefg',
-            'User-Agent' => 'RestOrm'
+            'User-Agent' => 'RestOrm',
         ];
         $this->client = new Client(['handler' => $this->stack, 'headers' => $clientHeaders]);
         $this->factory = $this->getMockBuilder('Tystr\RestOrm\Request\Factory')->disableOriginalConstructor()->getMock();

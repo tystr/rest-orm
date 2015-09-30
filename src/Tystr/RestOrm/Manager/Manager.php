@@ -93,7 +93,7 @@ class Manager
         $request = $this->requestFactory->createFindAllRequest($this->class);
         $response = $this->client->send($request);
 
-        return $this->responseMapper->map($response, sprintf('array<%s>',$this->class), 'json');
+        return $this->responseMapper->map($response, sprintf('array<%s>', $this->class), 'json');
     }
 
     /**

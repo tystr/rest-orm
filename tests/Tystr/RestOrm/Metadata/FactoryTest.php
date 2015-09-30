@@ -2,11 +2,6 @@
 
 namespace Tystr\RestOrm\Metadata;
 
-use Doctrine\Common\Annotations\AnnotationReader;
-use ReflectionClass;
-use Tystr\RestOrm\Annotation\Resource;
-use Tystr\RestOrm\Metadata\Metadata;
-
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */

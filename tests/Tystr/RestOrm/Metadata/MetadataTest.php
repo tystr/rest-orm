@@ -27,7 +27,6 @@ class MetadataTest extends \PHPUnit_Framework_TestCase
         $metadata = new Metadata(new \ReflectionClass('Tystr\RestOrm\Model\Blog'));
         $metadata->setIdentifier('id');
 
-        $this->assertEquals(42, $metadata->getIdentifierValue(new \stdClass));
-
+        $this->assertEquals(42, $metadata->getIdentifierValue(new \stdClass()));
     }
 }

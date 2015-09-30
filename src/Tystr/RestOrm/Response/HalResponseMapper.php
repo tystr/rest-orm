@@ -27,7 +27,7 @@ class HalResponseMapper implements ResponseMapperInterface
     }
 
     /**
-     * Maps a response body to an object
+     * Maps a response body to an object.
      *
      * @param ResponseInterface $response
      * @param string            $class
@@ -55,7 +55,7 @@ class HalResponseMapper implements ResponseMapperInterface
      *
      * @todo This is probably not a safe assumption to make
      *
-     * @param Hal     $hal
+     * @param Hal    $hal
      * @param string $class
      *
      * @return array
