@@ -2,6 +2,7 @@
 
 namespace Tystr\RestOrm\Response;
 
+use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -18,9 +19,9 @@ class StandardResponseMapper implements ResponseMapperInterface
     /**
      * @param SerializerInterface $serializer
      */
-    public function __construct(SerializerInterface $serializer)
+    public function __construct(SerializerInterface $serializer = null)
     {
-        $this->serializer = $serializer;
+        $this->serializer = $serializer ?: SerializerBuilder::create()->build();
     }
 
     /**
