@@ -3,6 +3,11 @@
 
 A simple ORM-like package for handling object persistence using a RESTful API.
 
+# Installation
+Install `tystr/rest-orm` with composer:
+
+    # composer.phar require tystr/rest-orm:~0.1
+
 # Configuration
 For each of your models you need to add mapping configuration and set up a `Manager` instance.
 
