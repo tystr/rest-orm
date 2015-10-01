@@ -10,7 +10,7 @@ use Tystr\RestOrm\Response\ResponseMapperInterface;
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class Manager
+class Manager implements ManagerInterface
 {
     /**
      * @var ClientInterface
