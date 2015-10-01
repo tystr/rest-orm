@@ -1,13 +1,13 @@
 <?php
 
-namespace Tystr\RestOrm\Manager;
+namespace Tystr\RestOrm\Repository;
 
 /**
- * Contract for classes responsible for managing mapped models.
+ * Contract for repositories responsible for handling mapped models.
  *
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-interface ManagerInterface
+interface RepositoryInterface
 {
     /**
      * @param object $object

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tystr\RestOrm\Manager;
+namespace Tystr\RestOrm\Repository;
 
 use GuzzleHttp\ClientInterface;
 use Tystr\RestOrm\Request\Factory;
@@ -10,7 +10,7 @@ use Tystr\RestOrm\Response\ResponseMapperInterface;
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class Manager implements ManagerInterface
+class Repository implements RepositoryInterface
 {
     /**
      * @var ClientInterface

@@ -22,23 +22,23 @@ $responseMapper = new \Tystr\RestOrm\Response\HalResponseMapper();
 
 // Instantiate a manager.
 $class = 'Post';
-$postManager = new \Tystr\RestOrm\Manager\Manager($client, $requestFactory, $responseMapper, $class);
+$repository = new \Tystr\RestOrm\Repository\Repository($client, $requestFactory, $responseMapper, $class);
 
 // Find all posts
-$posts = $manager->findAll();
+$posts = $repository->findAll();
 foreach ($posts as $post) {
     // ...
 }
 
 // Find a single post by it's id
-$post = $manager->findOneById('42');
+$post = $repository->findOneById('42');
 
 // Modify an existing post
 $post->title = 'New Title';
-$manager->save($post);
+$repository->save($post);
 
 // Delete a post
-$manager->remove($post);
+$repository->remove($post);
 
 
 /**

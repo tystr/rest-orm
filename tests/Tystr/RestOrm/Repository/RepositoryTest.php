@@ -1,6 +1,6 @@
 <?php
 
-namespace Tystr\RestOrm\Manager;
+namespace Tystr\RestOrm\Repository;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
@@ -15,7 +15,7 @@ use Tystr\RestOrm\Response\StandardResponseMapper;
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class ManagerTest extends \PHPUnit_Framework_TestCase
+class RepositoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Client
@@ -42,7 +42,7 @@ class ManagerTest extends \PHPUnit_Framework_TestCase
         $this->factory = $this->getMockBuilder('Tystr\RestOrm\Request\Factory')->disableOriginalConstructor()->getMock();
 
         $serializer = SerializerBuilder::create()->build();
-        $this->manager = new Manager(
+        $this->manager = new Repository(
             $this->client,
             $this->factory,
             new StandardResponseMapper($serializer),

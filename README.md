@@ -9,7 +9,7 @@ Install `tystr/rest-orm` with composer:
     # composer.phar require tystr/rest-orm:~0.1
 
 # Configuration
-For each of your models you need to add mapping configuration and set up a `Manager` instance.
+For each of your models you need to add mapping configuration and set up a `Repository` instance.
 
 ## Mapping
 RestOrm provides 2 annotations which must be used on each model:
@@ -57,9 +57,9 @@ class Blog
 }
 ```
 
-## Configure the Manager
+## Configure the Repository
 
-Now that your models are mapped, you need to configure a `Tystr\RestOrm\Manager\Manager` instance for each of your
+Now that your models are mapped, you need to configure a `Tystr\RestOrm\Repository\Repository` instance for each of your
 models.
 
 First, configure the guzzle client that will be used to make request to your API:
@@ -88,17 +88,17 @@ Now instantiate a Response Mapper. RestOrm currently provides 2 types of respons
 $responseMapper = new Tystr\RestOrm\Response\StandardResponseMapper();
 ```
 
-Finally, instantiate a Manager class for each of your models:
+Finally, instantiate a Repository class for each of your models:
 ```PHP
-// Instantiate a manager.
+// Instantiate a repository.
 $class = 'Your\Project\Blog\Post';
-$postManager = new Tystr\RestOrm\Manager\Manager($client, $requestFactory, $responseMapper, $class);
+$postRepository = new Tystr\RestOrm\Repository\Repository($client, $requestFactory, $responseMapper, $class);
 ```
 
 
 # Usage
 
-The `Tystr\RestOrm\Manager\ManagerInterface` currently provides 4 basic methods for interacting with your models:
+The `Tystr\RestOrm\Repository\RepositoryInterface` currently provides 4 basic methods for interacting with your models:
 * `save($model)`
 * `findOneById($id)`
 * `findAll()`
