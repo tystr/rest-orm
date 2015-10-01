@@ -54,7 +54,7 @@ class Manager implements ManagerInterface
      * @param object $object
      * @param bool   $mapResponse
      *
-     * @return bool|object
+     * @return object
      */
     public function save($object, $mapResponse = false)
     {
