@@ -29,7 +29,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->registry = new Registry($this->metadataFactory);
         $this->serializer = SerializerBuilder::create()->build();
         $this->urlGenerator = new StandardUrlGenerator();
-        $this->factory = new RequestFactory($this->registry, $this->serializer, $this->urlGenerator, 'json');
+        $this->factory = new RequestFactory($this->urlGenerator, 'json', $this->registry, $this->serializer);
     }
 
     /**

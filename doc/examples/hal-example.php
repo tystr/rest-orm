@@ -10,15 +10,11 @@ $headers = [
     'Authorization' => 'Token 23a65de8ea1f2b52defea12c0d7a9c11'
 ];
 $client = new \GuzzleHttp\Client(['headers' => $headers]);
-$serializer = \JMS\Serializer\SerializerBuilder::create()->build();
-
-// The metadata registry holds information about the resource to use in the url and the identifier
-$metadataRegistry = new \Tystr\RestOrm\Metadata\Registry();
 
 // The request factory generates the request that will be sent to the API. Note that you must set the format to be used
 // when serializing the models to build the request body.
 $urlGenerator = new \Tystr\RestOrm\UrlGenerator\StandardUrlGenerator('https://example.com/api');
-$requestFactory = new \Tystr\RestOrm\Request\Factory($metadataRegistry, $serializer, $urlGenerator, 'json');
+$requestFactory = new \Tystr\RestOrm\Request\Factory($urlGenerator, 'json');
 
 // The response mapper maps api responses to objects
 // Use the HalResponseMapper to correctly map HAL APIs

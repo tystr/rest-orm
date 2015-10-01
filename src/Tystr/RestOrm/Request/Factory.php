@@ -2,6 +2,7 @@
 
 namespace Tystr\RestOrm\Request;
 
+use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Tystr\RestOrm\Metadata\Registry;
 use GuzzleHttp\Psr7\Request;
@@ -31,21 +32,21 @@ class Factory
     private $format;
 
     /**
-     * @param Registry              $metadataRegistry
-     * @param SerializerInterface   $serializer
      * @param UrlGeneratorInterface $urlGenerator
      * @param string                $format
+     * @param Registry              $metadataRegistry
+     * @param SerializerInterface   $serializer
      */
     public function __construct(
-        Registry $metadataRegistry,
-        SerializerInterface $serializer,
         UrlGeneratorInterface $urlGenerator,
-        $format
+        $format,
+        Registry $metadataRegistry = null,
+        SerializerInterface $serializer = null
     ) {
-        $this->metadataRegistry = $metadataRegistry;
         $this->urlGenerator = $urlGenerator;
-        $this->serializer = $serializer;
         $this->format = $format;
+        $this->metadataRegistry = $metadataRegistry ?: new Registry();
+        $this->serializer = $serializer ?: SerializerBuilder::create()->build();
     }
 
     /**
