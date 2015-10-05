@@ -40,4 +40,13 @@ interface UrlGeneratorInterface
      * @return string
      */
     public function getFindAllUrl($resource, array $parameters = []);
+
+    /**
+     * @param string $resource
+     * @param string $id
+     * @param array  $parameters
+     *
+     * @return string
+     */
+    public function getRemoveUrl($resource, $id, array $parameters = []);
 }
