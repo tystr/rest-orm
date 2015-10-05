@@ -11,10 +11,11 @@ interface RepositoryInterface
 {
     /**
      * @param object $object
+     * @param bool   $mapResponse
      *
      * @return object
      */
-    public function save($object);
+    public function save($object, $mapResponse = false);
 
     /**
      * @param string|int $id
