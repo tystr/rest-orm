@@ -9,31 +9,35 @@ interface UrlGeneratorInterface
 {
     /**
      * @param string $resource
+     * @param array  $parameters
      *
      * @return string
      */
-    public function getCreateUrl($resource);
+    public function getCreateUrl($resource, array $parameters = []);
 
     /**
      * @param string $resource
      * @param string $id
+     * @param array  $parameters
      *
      * @return string
      */
-    public function getModifyUrl($resource, $id);
+    public function getModifyUrl($resource, $id, array $parameters = []);
 
     /**
      * @param string $resource
      * @param string $id
+     * @param array  $parameters
      *
      * @return string
      */
-    public function getFindOneUrl($resource, $id);
+    public function getFindOneUrl($resource, $id, array $parameters = []);
 
     /**
      * @param string $resource
+     * @param array  $parameters
      *
      * @return string
      */
-    public function getFindAllUrl($resource);
+    public function getFindAllUrl($resource, array $parameters = []);
 }
