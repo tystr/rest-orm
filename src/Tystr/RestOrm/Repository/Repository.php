@@ -53,16 +53,17 @@ class Repository implements RepositoryInterface
     /**
      * @param object $object
      * @param bool   $mapResponse
+     * @param array  $parameters
      *
      * @return object
      */
-    public function save($object, $mapResponse = false)
+    public function save($object, $mapResponse = false, array $parameters = [])
     {
         if (!$object instanceof $this->class) {
             throw new InvalidArgumentException();
         }
 
-        $request = $this->requestFactory->createSaveRequest($object);
+        $request = $this->requestFactory->createSaveRequest($object, $parameters);
         $response = $this->client->send($request);
 
         if (true === $mapResponse) {
@@ -74,23 +75,26 @@ class Repository implements RepositoryInterface
 
     /**
      * @param $id
+     * @param array $parameters
      *
      * @return object
      */
-    public function findOneById($id)
+    public function findOneById($id, array $parameters = [])
     {
-        $request = $this->requestFactory->createFindOneRequest($this->class, $id);
+        $request = $this->requestFactory->createFindOneRequest($this->class, $id, $parameters);
         $response = $this->client->send($request);
 
         return $this->responseMapper->map($response, $this->class, 'json');
     }
 
     /**
+     * @param array $parameters
+     *
      * @return object
      */
-    public function findAll()
+    public function findAll(array $parameters = [])
     {
-        $request = $this->requestFactory->createFindAllRequest($this->class);
+        $request = $this->requestFactory->createFindAllRequest($this->class, $parameters);
         $response = $this->client->send($request);
 
         return $this->responseMapper->map($response, sprintf('array<%s>', $this->class), 'json');
@@ -98,14 +102,15 @@ class Repository implements RepositoryInterface
 
     /**
      * @param object $object
+     * @param array  $parameters
      */
-    public function remove($object)
+    public function remove($object, array $parameters = [])
     {
         if (!$object instanceof $this->class) {
             throw new InvalidArgumentException();
         }
 
-        $request = $this->requestFactory->createDeleteRequest($object);
+        $request = $this->requestFactory->createDeleteRequest($object, $parameters);
         $response = $this->client->send($request);
 
         return true;
