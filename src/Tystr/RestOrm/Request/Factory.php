@@ -61,17 +61,18 @@ class Factory
      * Returns a POST request if the object's identifier is null; a PUT request is returned otherwise.
      *
      * @param object $object
+     * @param array  $parameters
      *
      * @return Request
      */
-    public function createSaveRequest($object)
+    public function createSaveRequest($object, array $parameters = [])
     {
         $metadata = $this->metadataRegistry->getMetadataForClass(get_class($object));
         if (null === $id = $metadata->getIdentifierValue($object)) {
             // Identifier is null so this is a new entity
             return new Request(
                 'POST',
-                $this->urlGenerator->getCreateUrl($metadata->getResource()),
+                $this->urlGenerator->getCreateUrl($metadata->getResource(), $parameters),
                 ['Content-Type' => $this->getContentTypeHeader()],
                 $this->serializer->serialize($object, $this->format)
             );
@@ -89,48 +90,55 @@ class Factory
     /**
      * @param string $class
      * @param string $id
+     * @param array  $parameters
      *
      * @return Request
      */
-    public function createFindOneRequest($class, $id)
+    public function createFindOneRequest($class, $id, array $parameters = [])
     {
         $metadata = $this->metadataRegistry->getMetadataForClass($class);
 
         return new Request(
             'GET',
-            $this->urlGenerator->getFindOneUrl($metadata->getResource(), $id),
+            $this->urlGenerator->getFindOneUrl($metadata->getResource(), $id, $parameters),
             ['Content-Type' => $this->getContentTypeHeader()]
         );
     }
 
     /**
      * @param string $class
+     * @param array  $parameters
      *
      * @return Request
      */
-    public function createFindAllRequest($class)
+    public function createFindAllRequest($class, array $parameters = [])
     {
         $metadata = $this->metadataRegistry->getMetadataForClass($class);
 
         return new Request(
             'GET',
-            $this->urlGenerator->getFindAllUrl($metadata->getResource()),
+            $this->urlGenerator->getFindAllUrl($metadata->getResource(), $parameters),
             ['Content-Type' => $this->getContentTypeHeader()]
         );
     }
 
     /**
      * @param object $object
+     * @param array  $parameters
      *
      * @return Request
      */
-    public function createDeleteRequest($object)
+    public function createDeleteRequest($object, array $parameters = [])
     {
         $metadata = $this->metadataRegistry->getMetadataForClass(get_class($object));
 
         return new Request(
             'DELETE',
-            $this->urlGenerator->getRemoveUrl($metadata->getResource(), $metadata->getIdentifierValue($object)),
+            $this->urlGenerator->getRemoveUrl(
+                $metadata->getResource(),
+                $metadata->getIdentifierValue($object),
+                $parameters
+            ),
             ['Content-Type' => $this->getContentTypeHeader()]
         );
     }
