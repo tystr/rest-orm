@@ -6,6 +6,7 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use ReflectionClass;
 use Tystr\RestOrm\Annotation\Resource;
 use Tystr\RestOrm\Annotation\Id;
+use Tystr\RestOrm\Annotation\Hal;
 use Tystr\RestOrm\Exception\InvalidIdentifierMappingException;
 use Tystr\RestOrm\Exception\MissingIdentifierMappingException;
 
@@ -24,12 +25,17 @@ class Factory
         $reader = new AnnotationReader();
         $reflClass = new ReflectionClass($class);
         $resource = $reader->getClassAnnotation($reflClass, Resource::class);
+        $hal = $reader->getClassAnnotation($reflClass, Hal::class);
 
         $metadata = new Metadata($reflClass);
         $metadata->setResource($resource->value);
         $identifier = $this->getIdentifier($reflClass, $reader);
         if (null === $identifier) {
             throw new MissingIdentifierMappingException('You must specify an identifier mapping.');
+        }
+
+        if (null !== $hal) {
+            $metadata->setEmbeddedRel($hal->embeddedRel);
         }
 
         $metadata->setIdentifier($identifier);

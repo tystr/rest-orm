@@ -3,16 +3,10 @@
 namespace Tystr\RestOrm\Model;
 
 use JMS\Serializer\Annotation\Type;
-use Tystr\RestOrm\Annotation\Embedded;
-use Tystr\RestOrm\Annotation\Hal;
 use Tystr\RestOrm\Annotation\Id;
 use Tystr\RestOrm\Annotation\Resource;
 
-/**
- * @Resource("blogs")
- * @Hal(embeddedRel="blogs")
- */
-class BlogHal
+class Comment
 {
     /**
      * @Id()
@@ -26,7 +20,14 @@ class BlogHal
     public $body;
 
     /**
-     * @Type("array<Tystr\RestOrm\Model\Comment>")
+     * @Type("string")
      */
-    public $comments;
+    public $author;
+
+    public function __construct($id, $body)
+    {
+        $this->id = $id;
+        $this->body = $body;
+    }
 }
+

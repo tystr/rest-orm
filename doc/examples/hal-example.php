@@ -18,7 +18,8 @@ $requestFactory = new \Tystr\RestOrm\Request\Factory($urlGenerator, 'json');
 
 // The response mapper maps api responses to objects
 // Use the HalResponseMapper to correctly map HAL APIs
-$responseMapper = new \Tystr\RestOrm\Response\HalResponseMapper();
+$metadataRegistry = new \Tystr\RestOrm\Metadata\Registry();
+$responseMapper = new \Tystr\RestOrm\Response\HalResponseMapper($metadataRegistry);
 
 // Instantiate a manager.
 $class = 'Post';

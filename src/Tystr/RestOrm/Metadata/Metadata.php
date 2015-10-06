@@ -26,6 +26,11 @@ class Metadata
     private $identifier;
 
     /**
+     * @var string
+     */
+    private $embeddedRel;
+
+    /**
      * @param ReflectionClass $reflClass
      */
     public function __construct(ReflectionClass $reflClass)
@@ -85,5 +90,21 @@ class Metadata
         }
 
         return $this->reflClass->getProperty($this->getIdentifier())->getValue($object);
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmbeddedRel()
+    {
+        return $this->embeddedRel;
+    }
+
+    /**
+     * @param string $embeddedRel
+     */
+    public function setEmbeddedRel($embeddedRel)
+    {
+        $this->embeddedRel = $embeddedRel;
     }
 }

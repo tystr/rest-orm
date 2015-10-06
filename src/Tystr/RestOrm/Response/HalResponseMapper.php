@@ -7,6 +7,7 @@ use JMS\Serializer\SerializerInterface;
 use Nocarrier\Hal;
 use Psr\Http\Message\ResponseInterface;
 use Tystr\RestOrm\Exception\InvalidArgumentException;
+use Tystr\RestOrm\Metadata\Registry;
 
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
@@ -19,10 +20,16 @@ class HalResponseMapper implements ResponseMapperInterface
     private $serializer;
 
     /**
+     * @var Registry
+     */
+    private $metadataRegistry;
+
+    /**
      * @param SerializerInterface $serializer
      */
-    public function __construct(SerializerInterface $serializer = null)
+    public function __construct(Registry $metadataRegistry, SerializerInterface $serializer = null)
     {
+        $this->metadataRegistry = $metadataRegistry;
         $this->serializer = $serializer ?: SerializerBuilder::create()->build();
     }
 
@@ -49,35 +56,39 @@ class HalResponseMapper implements ResponseMapperInterface
     }
 
     /**
-     * Attempts to extra the model's data from the HAL representation. If there are embedded resources, we assume that
-     * this is a collection endpoint and we should use the embedded resources as the data. Otherwise, we use the root
-     * fields as the data.
-     *
-     * @todo This is probably not a safe assumption to make
-     *
      * @param Hal    $hal
      * @param string $class
      *
      * @return array
      */
-    protected function getDataFromHal(Hal $hal, &$class)
+    protected function getDataFromHal(Hal $hal, $class)
     {
-        $data = [];
-        $embeddedResources = $hal->getResources();
-        if (count($embeddedResources) > 0) {
-            foreach ($embeddedResources as $resources) {
-                foreach ($resources as $hal) {
-                    $data[] = $hal->getData();
-                }
+        $class = preg_match('/array<([^>]*)>/', $class, $matches) ? $matches[1] : $class;
+        $metadata = $this->metadataRegistry->getMetadataForClass($class);
+
+        $data = $this->flattenHal($hal);
+
+        reset($data);
+        if (count($data) === 1 && key($data) === $metadata->getEmbeddedRel()) {
+            $data = $data[key($data)];
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param Hal  $hal
+     * @param bool $isRoot
+     *
+     * @return array
+     */
+    protected function flattenHal(Hal $hal, $isRoot = true)
+    {
+        $data = $hal->getData();
+        foreach ($hal->getResources() as $name => $items) {
+            foreach ($items as $item) {
+                $data[$name][] = $this->flattenHal($item);
             }
-            // @todo Fix this hack makes sure we only wrap in array<> if the Repository hasn't already. This is because
-            // The StandardResponseMapper is not aware if the request is for a collection or not, so the manager handles
-            // wrapping the type in array<>
-            if (substr($class, 0, 6) !== 'array<') {
-                $class = sprintf('array<%s>', $class);
-            }
-        } else {
-            $data = $hal->getData();
         }
 
         return $data;
