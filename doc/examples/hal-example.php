@@ -49,6 +49,9 @@ class Post
     /**
      * @Tystr\RestOrm\Annotation\Id()
      * @JMS\Serializer\Annotation\Type("string")
+     *
+     * Adding any group (besides "Default") will ensure a property is not serialized when saving the object.
+     * @JMS\Serializer\Annotation\Groups("READ_ONLY")
      */
     public $id;
 

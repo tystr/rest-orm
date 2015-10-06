@@ -2,6 +2,7 @@
 
 namespace Tystr\RestOrm\Request;
 
+use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use Tystr\RestOrm\Metadata\Registry;
@@ -74,16 +75,16 @@ class Factory
                 'POST',
                 $this->urlGenerator->getCreateUrl($metadata->getResource(), $parameters),
                 ['Content-Type' => $this->getContentTypeHeader()],
-                $this->serializer->serialize($object, $this->format)
+                $this->serializer->serialize($object, $this->format, SerializationContext::create()->setGroups('Default'))
             );
         }
 
         // Identifier is set so we are modifying an exiting entity
         return new Request(
             'PUT',
-            $this->urlGenerator->getModifyUrl($metadata->getResource(), $id),
+            $this->urlGenerator->getModifyUrl($metadata->getResource(), $id, $parameters),
             ['Content-Type' => $this->getContentTypeHeader()],
-            $this->serializer->serialize($object, $this->format)
+            $this->serializer->serialize($object, $this->format, SerializationContext::create()->setGroups('Default'))
         );
     }
 

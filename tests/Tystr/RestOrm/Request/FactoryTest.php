@@ -4,6 +4,7 @@ namespace Tystr\RestOrm\Request;
 
 use JMS\Serializer\SerializerBuilder;
 use Tystr\RestOrm\Model\Blog;
+use Tystr\RestOrm\Model\BlogGroup;
 use Tystr\RestOrm\Request\Factory as RequestFactory;
 use Tystr\RestOrm\Metadata\Registry;
 use Tystr\RestOrm\Metadata\Factory as MetadataFactory;
@@ -47,6 +48,29 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $request = $this->factory->createSaveRequest($blog, $parameters);
 
         $this->assertEquals('POST', $request->getMethod());
+        $this->assertEquals('application/'.$format, $request->getHeaderLine('Content-Type'));
+        $this->assertEquals('/blogs'.$expectedQueryString, $request->getUri());
+        $this->assertEquals($expectedBody, (string) $request->getBody());
+    }
+
+    /**
+     * @dataProvider getFormatAndBodyWithoutId
+     */
+    public function testCreateSaveRequestForEntityWithSerializationGroups($format, $expectedBody, $parameters, $expectedQueryString)
+    {
+        $this->factory->setFormat($format);
+        $blog = new BlogGroup();
+        $blog->id = 123; // This property has the @Groups("READ") annotation and should be excluded from the request body
+        $blog->body = 'Hello World!';
+
+        $this->urlGenerator->expects($this->once())
+            ->method('getModifyUrl')
+            ->with('blogs', 123, $parameters)
+            ->will($this->returnValue('/blogs'.$expectedQueryString));
+
+        $request = $this->factory->createSaveRequest($blog, $parameters);
+
+        $this->assertEquals('PUT', $request->getMethod());
         $this->assertEquals('application/'.$format, $request->getHeaderLine('Content-Type'));
         $this->assertEquals('/blogs'.$expectedQueryString, $request->getUri());
         $this->assertEquals($expectedBody, (string) $request->getBody());
