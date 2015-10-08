@@ -5,4 +5,13 @@ php:
   - hhvm
   - nightly
 
+before_install:
+  - pip install --user codecov
+
 before_script: composer install -n
+
+script:
+  - ./vendor/bin/phpunit --coverage-clover=coverage.xml
+
+after_success:
+  - codecov
