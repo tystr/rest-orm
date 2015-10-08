@@ -6,3 +6,9 @@ php:
   - nightly
 
 before_script: composer install -n
+before_script: composer require satooshi/php-coveralls --dev
+
+script:
+  - mkdir -p build/logs
+  - ./vendor/bin/behat
+  - ./vendor/bin/phpunit --coverage-clover=build/logs/clover.xml
