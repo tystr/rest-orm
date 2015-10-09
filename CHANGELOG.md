@@ -1,4 +1,9 @@
-# v0.2.0 (20150-10-05)
+# v0.3.0 (2015-10-09)
+
+* Fix handling for embedded objects when using HAL
+* Use the "Default" serializer group when serializing objects for persisting. This allows for adding groups to properties to exclude them from the PUT/POST requests. This is essentially the same functionality as the @ReadOnly jms/serializer annotation but for serializing not deserializing
+
+# v0.2.0 (2015-10-05)
 
 * Modify the Repository to accept parameters and pass them to the request factory
 * Add missing argument to RepositoryInterface::save()
