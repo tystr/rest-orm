@@ -54,7 +54,7 @@ class Repository implements RepositoryInterface
      * @param object $object
      * @param bool   $mapResponse
      * @param array  $parameters
-     * @param array $requirements
+     * @param array  $requirements
      *
      * @return object
      */
