@@ -54,16 +54,17 @@ class Repository implements RepositoryInterface
      * @param object $object
      * @param bool   $mapResponse
      * @param array  $parameters
+     * @param array $requirements
      *
      * @return object
      */
-    public function save($object, $mapResponse = false, array $parameters = [])
+    public function save($object, $mapResponse = false, array $parameters = [], array $requirements = [])
     {
         if (!$object instanceof $this->class) {
             throw new InvalidArgumentException();
         }
 
-        $request = $this->requestFactory->createSaveRequest($object, $parameters);
+        $request = $this->requestFactory->createSaveRequest($object, $parameters, $requirements);
         $response = $this->client->send($request);
 
         if (true === $mapResponse) {
@@ -76,12 +77,13 @@ class Repository implements RepositoryInterface
     /**
      * @param $id
      * @param array $parameters
+     * @param array $requirements
      *
      * @return object
      */
-    public function findOneById($id, array $parameters = [])
+    public function findOneById($id, array $parameters = [], array $requirements = [])
     {
-        $request = $this->requestFactory->createFindOneRequest($this->class, $id, $parameters);
+        $request = $this->requestFactory->createFindOneRequest($this->class, $id, $parameters, $requirements);
         $response = $this->client->send($request);
 
         return $this->responseMapper->map($response, $this->class, 'json');
@@ -89,12 +91,13 @@ class Repository implements RepositoryInterface
 
     /**
      * @param array $parameters
+     * @param array $requirements
      *
      * @return object
      */
-    public function findAll(array $parameters = [])
+    public function findAll(array $parameters = [], array $requirements = [])
     {
-        $request = $this->requestFactory->createFindAllRequest($this->class, $parameters);
+        $request = $this->requestFactory->createFindAllRequest($this->class, $parameters, $requirements);
         $response = $this->client->send($request);
 
         return $this->responseMapper->map($response, sprintf('array<%s>', $this->class), 'json');
@@ -103,14 +106,15 @@ class Repository implements RepositoryInterface
     /**
      * @param object $object
      * @param array  $parameters
+     * @param array  $requirements
      */
-    public function remove($object, array $parameters = [])
+    public function remove($object, array $parameters = [], array $requirements = [])
     {
         if (!$object instanceof $this->class) {
             throw new InvalidArgumentException();
         }
 
-        $request = $this->requestFactory->createDeleteRequest($object, $parameters);
+        $request = $this->requestFactory->createDeleteRequest($object, $parameters, $requirements);
         $response = $this->client->send($request);
 
         return true;

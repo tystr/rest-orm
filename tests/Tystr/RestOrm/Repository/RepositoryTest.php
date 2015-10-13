@@ -61,6 +61,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->mock->append($response);
 
         $requestBody = '{"body": "Hello World."}';
+        $requirements = ['categoryId' => 12345];
         $parameters = ['query_param_1' => 'hello'];
         $mockRequest = new Request('POST', '/blogs', ['Content-Type' => 'application/json'], $requestBody);
 
@@ -69,10 +70,10 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
         $this->factory->expects($this->once())
             ->method('createSaveRequest')
-            ->with($blog, $parameters)
+            ->with($blog, $parameters, $requirements)
             ->willReturn($mockRequest);
 
-        $savedBlog = $this->manager->save($blog, true, $parameters);
+        $savedBlog = $this->manager->save($blog, true, $parameters, $requirements);
 
         $this->assertEquals(1, $savedBlog->id);
         $this->assertEquals('Hello World.', $savedBlog->body);
@@ -103,15 +104,16 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         );
         $this->mock->append($response);
 
+        $requirements = ['categoryId' => 12345];
         $parameters = ['query_param_1' => 'hello'];
         $mockRequest = new Request('GET', '/blogs/1', ['Content-Type' => 'application/json']);
 
         $this->factory->expects($this->once())
             ->method('createFindOneRequest')
-            ->with(Blog::class, 1, $parameters)
+            ->with(Blog::class, 1, $parameters, $requirements)
             ->willReturn($mockRequest);
 
-        $blog = $this->manager->findOneById(1, $parameters);
+        $blog = $this->manager->findOneById(1, $parameters, $requirements);
 
         $this->assertInstanceOf(Blog::class, $blog);
         $this->assertEquals(1, $blog->id);
@@ -142,15 +144,16 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         );
         $this->mock->append($response);
 
+        $requirements = ['categoryId' => 12345];
         $parameters = ['query_param_1' => 'hello'];
         $mockRequest = new Request('GET', '/blogs', ['Content-Type' => 'application/json']);
 
         $this->factory->expects($this->once())
             ->method('createFindAllRequest')
-            ->with(Blog::class, $parameters)
+            ->with(Blog::class, $parameters, $requirements)
             ->willReturn($mockRequest);
 
-        $blogs = $this->manager->findAll($parameters);
+        $blogs = $this->manager->findAll($parameters, $requirements);
 
         $this->assertTrue(is_array($blogs));
         $this->assertCount(2, $blogs);
@@ -188,6 +191,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         );
         $this->mock->append($response);
 
+        $requirements = ['categoryId' => 12345];
         $parameters = ['query_param_1' => 'hello'];
         $mockRequest = new Request('GET', '/blogs/1', ['Content-Type' => 'application/json']);
 
@@ -195,10 +199,10 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $blog->id = 1;
         $this->factory->expects($this->once())
             ->method('createDeleteRequest')
-            ->with($blog, $parameters)
+            ->with($blog, $parameters, $requirements)
             ->willReturn($mockRequest);
 
-        $success = $this->manager->remove($blog, $parameters);
+        $success = $this->manager->remove($blog, $parameters, $requirements);
         $this->assertTrue($success);
 
         $expectedHeaders = [
