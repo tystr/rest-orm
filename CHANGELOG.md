@@ -1,3 +1,12 @@
+# v0.4.0 (2015-10-13)
+
+* fixed cs
+* Update hal-example.php to use the repository factory
+* Add a factory for creating repositories
+* Update RepositoryInterface with requirements arguments
+* Pass requirements to the url generator from the repostiory
+* Handle required url variables like /categories/{{categoryId}}/posts
+
 # v0.3.0 (2015-10-09)
 
 * Fix handling for embedded objects when using HAL
