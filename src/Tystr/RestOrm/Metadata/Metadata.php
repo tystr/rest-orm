@@ -3,6 +3,7 @@
 namespace Tystr\RestOrm\Metadata;
 
 use Tystr\RestOrm\Exception\InvalidArgumentException;
+use Tystr\RestOrm\Repository\Repository;
 use ReflectionClass;
 
 /**
@@ -29,6 +30,11 @@ class Metadata
      * @var string
      */
     private $embeddedRel;
+
+    /**
+     * @var string
+     */
+    private $repositoryClass;
 
     /**
      * @param ReflectionClass $reflClass
@@ -106,5 +112,21 @@ class Metadata
     public function setEmbeddedRel($embeddedRel)
     {
         $this->embeddedRel = $embeddedRel;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRepositoryClass()
+    {
+        return $this->repositoryClass ?: Repository::class;
+    }
+
+    /**
+     * @param string $repositoryClass
+     */
+    public function setRepositoryClass($repositoryClass)
+    {
+        $this->repositoryClass = $repositoryClass;
     }
 }
