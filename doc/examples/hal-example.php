@@ -21,9 +21,12 @@ $requestFactory = new \Tystr\RestOrm\Request\Factory($urlGenerator, 'json');
 $metadataRegistry = new \Tystr\RestOrm\Metadata\Registry();
 $responseMapper = new \Tystr\RestOrm\Response\HalResponseMapper($metadataRegistry);
 
-// Instantiate a manager.
+// The repository factory eases creation of repositories and acts as a registry for already created repositories.
+$repositoryFactory = new \Tystr\RestOrm\Repository\RepositoryFactory($client, $requestFactory, $responseMapper, $metadataRegistry);
+
+// Get a repository for the "Post" class.
 $class = 'Post';
-$repository = new \Tystr\RestOrm\Repository\Repository($client, $requestFactory, $responseMapper, $class);
+$repositoryFactory->getRepository($class);
 
 // Find all posts
 $posts = $repository->findAll();
