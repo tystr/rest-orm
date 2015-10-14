@@ -86,6 +86,7 @@ class HalResponseMapper implements ResponseMapperInterface
     {
         $data = $hal->getData();
         foreach ($hal->getResources() as $name => $items) {
+            $data[$name] = [];
             foreach ($items as $item) {
                 $data[$name][] = $this->flattenHal($item);
             }
