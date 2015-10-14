@@ -1,3 +1,7 @@
+# v0.5.2 (2015-10-14)
+
+* Fix a bug when handling embedded HAL collections when the embedded rel is the same as a key on the parent
+
 # v0.5.1 (2015-10-14)
 
 * Fix handling of identifier values when it is private/protected
