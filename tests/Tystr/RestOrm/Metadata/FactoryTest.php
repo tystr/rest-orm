@@ -13,6 +13,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $metadata = $factory->create('Tystr\RestOrm\Model\Blog');
 
         $this->assertEquals('Tystr\RestOrm\Model\Blog', $metadata->getClass());
+        $this->assertEquals('Tystr\RestOrm\Repository\BlogRepository', $metadata->getRepositoryClass());
         $this->assertEquals('blogs', $metadata->getResource());
         $this->assertEquals('id', $metadata->getIdentifier());
     }

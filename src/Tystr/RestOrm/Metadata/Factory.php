@@ -29,6 +29,7 @@ class Factory
 
         $metadata = new Metadata($reflClass);
         $metadata->setResource($resource->value);
+        $metadata->setRepositoryClass($resource->repositoryClass);
         $identifier = $this->getIdentifier($reflClass, $reader);
         if (null === $identifier) {
             throw new MissingIdentifierMappingException('You must specify an identifier mapping.');
