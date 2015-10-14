@@ -1,3 +1,7 @@
+# v0.5.1 (2015-10-14)
+
+* Fix handling of identifier values when it is private/protected
+
 # v0.5.0 (2015-10-13)
 
 * Allow configuring a custom repository class in the @Resource annotation
