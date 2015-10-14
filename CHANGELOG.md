@@ -1,3 +1,7 @@
+# v0.5.0 (2015-10-13)
+
+* Allow configuring a custom repository class in the @Resource annotation
+
 # v0.4.0 (2015-10-13)
 
 * fixed cs
