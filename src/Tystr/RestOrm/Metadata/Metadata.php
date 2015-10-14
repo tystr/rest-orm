@@ -95,7 +95,10 @@ class Metadata
             throw new InvalidArgumentException(sprintf('$object must be an instance of "%s".', $this->getClass()));
         }
 
-        return $this->reflClass->getProperty($this->getIdentifier())->getValue($object);
+        $property = $this->reflClass->getProperty($this->getIdentifier());
+        $property->setAccessible(true);
+
+        return $property->getValue($object);
     }
 
     /**
