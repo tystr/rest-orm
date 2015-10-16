@@ -63,17 +63,18 @@ class Factory
      *
      * @param object $object
      * @param array  $parameters
+     * @param array  $requirements
      *
      * @return Request
      */
-    public function createSaveRequest($object, array $parameters = [])
+    public function createSaveRequest($object, array $parameters = [], array $requirements = [])
     {
         $metadata = $this->metadataRegistry->getMetadataForClass(get_class($object));
         if (null === $id = $metadata->getIdentifierValue($object)) {
             // Identifier is null so this is a new entity
             return new Request(
                 'POST',
-                $this->urlGenerator->getCreateUrl($metadata->getResource(), $parameters),
+                $this->urlGenerator->getCreateUrl($metadata->getResource(), $parameters, $requirements),
                 ['Content-Type' => $this->getContentTypeHeader()],
                 $this->serializer->serialize($object, $this->format, SerializationContext::create()->setGroups('Default'))
             );
@@ -82,7 +83,7 @@ class Factory
         // Identifier is set so we are modifying an exiting entity
         return new Request(
             'PUT',
-            $this->urlGenerator->getModifyUrl($metadata->getResource(), $id, $parameters),
+            $this->urlGenerator->getModifyUrl($metadata->getResource(), $id, $parameters, $requirements),
             ['Content-Type' => $this->getContentTypeHeader()],
             $this->serializer->serialize($object, $this->format, SerializationContext::create()->setGroups('Default'))
         );
@@ -92,16 +93,17 @@ class Factory
      * @param string $class
      * @param string $id
      * @param array  $parameters
+     * @param array  $requirements
      *
      * @return Request
      */
-    public function createFindOneRequest($class, $id, array $parameters = [])
+    public function createFindOneRequest($class, $id, array $parameters = [], array $requirements = [])
     {
         $metadata = $this->metadataRegistry->getMetadataForClass($class);
 
         return new Request(
             'GET',
-            $this->urlGenerator->getFindOneUrl($metadata->getResource(), $id, $parameters),
+            $this->urlGenerator->getFindOneUrl($metadata->getResource(), $id, $parameters, $requirements),
             ['Content-Type' => $this->getContentTypeHeader()]
         );
     }
@@ -109,16 +111,17 @@ class Factory
     /**
      * @param string $class
      * @param array  $parameters
+     * @param array  $requirements
      *
      * @return Request
      */
-    public function createFindAllRequest($class, array $parameters = [])
+    public function createFindAllRequest($class, array $parameters = [], array $requirements = [])
     {
         $metadata = $this->metadataRegistry->getMetadataForClass($class);
 
         return new Request(
             'GET',
-            $this->urlGenerator->getFindAllUrl($metadata->getResource(), $parameters),
+            $this->urlGenerator->getFindAllUrl($metadata->getResource(), $parameters, $requirements),
             ['Content-Type' => $this->getContentTypeHeader()]
         );
     }
@@ -126,10 +129,11 @@ class Factory
     /**
      * @param object $object
      * @param array  $parameters
+     * @param array  $requirements
      *
      * @return Request
      */
-    public function createDeleteRequest($object, array $parameters = [])
+    public function createDeleteRequest($object, array $parameters = [], array $requirements = [])
     {
         $metadata = $this->metadataRegistry->getMetadataForClass(get_class($object));
 
@@ -138,7 +142,8 @@ class Factory
             $this->urlGenerator->getRemoveUrl(
                 $metadata->getResource(),
                 $metadata->getIdentifierValue($object),
-                $parameters
+                $parameters,
+                $requirements
             ),
             ['Content-Type' => $this->getContentTypeHeader()]
         );
