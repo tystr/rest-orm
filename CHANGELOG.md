@@ -1,3 +1,7 @@
+# v0.5.3 (2015-10-19)
+
+* Allow passing requirements in the request factory methods
+
 # v0.5.2 (2015-10-14)
 
 * Fix a bug when handling embedded HAL collections when the embedded rel is the same as a key on the parent
