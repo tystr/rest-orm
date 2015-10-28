@@ -43,5 +43,5 @@ interface RepositoryInterface
      *
      * @return bool
      */
-    public function remove($object, array $parameters, array $requirements = []);
+    public function remove($object, array $parameters = [], array $requirements = []);
 }
