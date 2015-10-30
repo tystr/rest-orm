@@ -16,4 +16,13 @@
             <directory>./tests/Tystr</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./src/Tystr/RestOrm/</directory>
+            <exclude>
+               <directory>./tests/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>
