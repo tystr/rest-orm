@@ -5,4 +5,16 @@ php:
   - hhvm
   - nightly
 
-before_script: composer install -n
+before_script:
+  - composer install -n
+  - composer require codeclimate/php-test-reporter:dev-master@dev
+
+script:
+  - ./vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+  - ./vendor/bin/test-reporter
+
+addons:
+  code_climate:
+    repo_token: 901c10151b90e01266f918760b2b23e8a36cae2369478310a3e2e9dca1fe5fd9

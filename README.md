@@ -1,5 +1,5 @@
 # RestOrm
-[![Build Status](https://travis-ci.org/tystr/rest-orm.svg?branch=master)](https://travis-ci.org/tystr/rest-orm)
+[![Build Status](https://travis-ci.org/tystr/rest-orm.svg?branch=master)](https://travis-ci.org/tystr/rest-orm) [![Test Coverage](https://codeclimate.com/github/tystr/rest-orm/badges/coverage.svg)](https://codeclimate.com/github/tystr/rest-orm/coverage)
 
 A simple ORM-like package for handling object persistence using a RESTful API.
 
