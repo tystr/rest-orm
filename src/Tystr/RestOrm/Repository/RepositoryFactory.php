@@ -86,6 +86,14 @@ class RepositoryFactory implements RepositoryFactoryInterface
         $metadata = $this->metadataRegistry->getMetadataForClass($class);
         $repositoryClass = $metadata->getRepositoryClass();
 
-        return new $repositoryClass($this->client, $this->requestFactory, $this->responseMapper, $class);
+        $repository = new $repositoryClass($this->client, $this->requestFactory, $this->responseMapper, $class);
+
+        if (!$repository instanceof RepositoryInterface) {
+            throw new InvalidArgumentException(
+                sprintf('Repositories must implement "Tystr\RestOrm\Repository\RepositoryInterface')
+            );
+        }
+
+        return $repository;
     }
 }

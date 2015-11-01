@@ -51,4 +51,19 @@ class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Tystr\RestOrm\Repository\Repository', $repository);
         $this->assertSame($repository, $this->factory->getRepository('Tystr\RestOrm\Model\Blog'));
     }
+
+    /**
+     * @expectedException Tystr\RestOrm\Exception\InvalidArgumentException
+     */
+    public function testGetRepositoryThrowsExceptionIfRepositoryDoesNotImplementRepositoryInterface()
+    {
+        $metadata = new Metadata(new \ReflectionClass('stdClass'));
+        $metadata->setRepositoryClass('stdClass');
+        $this->metadataRegistry->expects($this->once())
+            ->method('getMetadataForClass')
+            ->with('stdClass')
+            ->willReturn($metadata);
+
+        $repository = $this->factory->getRepository('stdClass');
+    }
 }
