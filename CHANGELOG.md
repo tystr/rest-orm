@@ -1,3 +1,12 @@
+# v0.5.4 (2016-02-01)
+
+* Change repository property access to protected
+* update copyright year
+* Ensure that the RepositoryFactory only creates repositories that implement the repository interface
+* Exlclude test directory from coverage report
+* Report test coverage to code climate
+* Fix typo in RepositoryInterface
+
 # v0.5.3 (2015-10-19)
 
 * Allow passing requirements in the request factory methods
