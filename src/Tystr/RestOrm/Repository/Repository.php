@@ -15,22 +15,22 @@ class Repository implements RepositoryInterface
     /**
      * @var ClientInterface
      */
-    private $client;
+    protected $client;
 
     /**
      * @var Factory
      */
-    private $requestFactory;
+    protected $requestFactory;
 
     /**
      * @var ResponseMapperInterface
      */
-    private $responseMapper;
+    protected $responseMapper;
 
     /**
      * @var string
      */
-    private $class;
+    protected $class;
 
     /**
      * @param ClientInterface         $client
