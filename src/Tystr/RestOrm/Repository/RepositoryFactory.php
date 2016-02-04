@@ -77,6 +77,17 @@ class RepositoryFactory implements RepositoryFactoryInterface
     }
 
     /**
+     * Instantiate repository
+     *
+     * @param $class
+     * @return RepositoryInterface
+     */
+    protected function instantiateRepository($class)
+    {
+        return new $class($this->client, $this->requestFactory, $this->responseMapper, $class);
+    }
+
+    /**
      * @param $class
      *
      * @return RepositoryInterface
@@ -86,7 +97,7 @@ class RepositoryFactory implements RepositoryFactoryInterface
         $metadata = $this->metadataRegistry->getMetadataForClass($class);
         $repositoryClass = $metadata->getRepositoryClass();
 
-        $repository = new $repositoryClass($this->client, $this->requestFactory, $this->responseMapper, $class);
+        $repository = $this->instantiateRepository($repositoryClass);
 
         if (!$repository instanceof RepositoryInterface) {
             throw new InvalidArgumentException(
