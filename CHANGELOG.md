@@ -1,3 +1,8 @@
+# v0.5.5 (2016-05-09)
+
+* Fix broken factory instantiateRepository() API (#13)
+* Allow repository instantiation to be overridden
+
 # v0.5.4 (2016-02-01)
 
 * Change repository property access to protected
