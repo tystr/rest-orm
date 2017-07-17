@@ -4,6 +4,8 @@
 [![Packagist](https://img.shields.io/packagist/v/tystr/rest-orm.svg)](https://packagist.org/packages/tystr/rest-orm)
 [![Downloads](https://img.shields.io/packagist/dt/tystr/rest-orm.svg)](https://packagist.org/packages/tystr/rest-orm)
 
+_**Note: as of `v0.6.0` this library depends on `PHP 7.x`.**_
+
 A simple ORM-like package for handling object persistence using a RESTful API.
 
 # Installation
