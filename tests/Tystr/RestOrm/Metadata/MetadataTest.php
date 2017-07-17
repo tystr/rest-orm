@@ -2,13 +2,14 @@
 
 namespace Tystr\RestOrm\Metadata;
 
+use PHPUnit\Framework\TestCase;
 use Tystr\RestOrm\Model\Blog;
 use Tystr\RestOrm\Model\BlogPrivateProperties;
 
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class MetadataTest extends \PHPUnit_Framework_TestCase
+class MetadataTest extends TestCase
 {
     public function testGetIdentifierValue()
     {

@@ -2,6 +2,7 @@
 
 namespace Tystr\RestOrm\Repository;
 
+use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -16,7 +17,7 @@ use Tystr\RestOrm\Response\StandardResponseMapper;
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class RepositoryFactoryTest extends \PHPUnit_Framework_TestCase
+class RepositoryFactoryTest extends TestCase
 {
     protected $client;
     protected $requestFactory;

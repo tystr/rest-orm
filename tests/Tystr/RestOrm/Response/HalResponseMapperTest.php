@@ -2,6 +2,7 @@
 
 namespace Tystr\RestOrm\Response;
 
+use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Psr7\Response;
 use JMS\Serializer\SerializerBuilder;
 use Tystr\RestOrm\Metadata\Registry;
@@ -11,7 +12,7 @@ use Tystr\RestOrm\Model\Comment;
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class HalResponseMapperTest extends \PHPUnit_Framework_TestCase
+class HalResponseMapperTest extends TestCase
 {
     public function testMapWithHalCollection()
     {

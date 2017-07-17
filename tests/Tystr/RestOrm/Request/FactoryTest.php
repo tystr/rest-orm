@@ -2,6 +2,7 @@
 
 namespace Tystr\RestOrm\Request;
 
+use PHPUnit\Framework\TestCase;
 use JMS\Serializer\SerializerBuilder;
 use Tystr\RestOrm\Model\Blog;
 use Tystr\RestOrm\Model\BlogGroup;
@@ -13,7 +14,7 @@ use Tystr\RestOrm\Metadata\Factory as MetadataFactory;
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     protected $metadataFactory;
     protected $registry;
