@@ -3,7 +3,7 @@
     "description": "A simple ORM-like library handling object persistence with a RESTful API.",
     "keywords": ["orm", "rest", "api"],
     "require": {
-        "php": ">=5.5",
+        "php": ">=7.0",
         "guzzlehttp/guzzle": "^6.1",
         "jms/serializer": "^1.0",
         "jms/metadata": "^1.5",
