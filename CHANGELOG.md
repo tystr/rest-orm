@@ -1,3 +1,10 @@
+# v0.6.0 (2017-07-17)
+
+* Add note about requiring php 7.0 or higher to readme
+* Add packagist badges to readme
+* remove composer.lock from repo
+* Upgrade phpunit and require php7.x (#14)
+
 # v0.5.5 (2016-05-09)
 
 * Fix broken factory instantiateRepository() API (#13)
