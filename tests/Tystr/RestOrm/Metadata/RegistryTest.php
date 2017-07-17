@@ -2,10 +2,12 @@
 
 namespace Tystr\RestOrm\Metadata;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class RegistryTest extends \PHPUnit_Framework_TestCase
+class RegistryTest extends TestCase
 {
     protected $class;
     protected $factory;

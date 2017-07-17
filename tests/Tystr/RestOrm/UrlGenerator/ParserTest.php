@@ -2,10 +2,12 @@
 
 namespace Tystr\RestOrm\UrlGenerator;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class ParserTest extends \PHPUnit_Framework_TestCase
+class ParserTest extends TestCase
 {
     private $parser;
 

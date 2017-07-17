@@ -2,10 +2,12 @@
 
 namespace Tystr\RestOrm\Metadata;
 
+use PHPUnit\Framework\TestCase;
+
 /**
  * @author Tyler Stroud <tyler@tylerstroud.com>
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     public function testCreate()
     {
