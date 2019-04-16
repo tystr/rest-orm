@@ -1,4 +1,5 @@
 # RestOrm
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/770bc69979bb44eead8bb38066ce95db)](https://app.codacy.com/app/tystr/rest-orm?utm_source=github.com&utm_medium=referral&utm_content=tystr/rest-orm&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/tystr/rest-orm.svg?branch=master)](https://travis-ci.org/tystr/rest-orm)
 [![Test Coverage](https://codeclimate.com/github/tystr/rest-orm/badges/coverage.svg)](https://codeclimate.com/github/tystr/rest-orm/coverage)
 [![Packagist](https://img.shields.io/packagist/v/tystr/rest-orm.svg)](https://packagist.org/packages/tystr/rest-orm)
